@@ -1,0 +1,11 @@
+USE Restaurante5amigos;
+SELECT * FROM clientes;
+SELECT * FROM pedidos WHERE id_cliente = 1;
+SELECT nome, preco FROM produtos ORDER BY preco DESC;
+SELECT p.id_pedido, c.nome FROM pedidos p JOIN clientes c ON p.id_cliente = c.id_cliente;
+SELECT p.id_pedido, c.nome, m.numero FROM pedidos p JOIN clientes c ON p.id_cliente = c.id_cliente JOIN mesas m ON p.id_mesa = m.id_mesa;
+SELECT pr.nome, SUM(ip.quantidade * ip.preco_unitario) AS total_vendas FROM itens_pedido ip JOIN produtos pr ON ip.id_produto = pr.id_produto GROUP BY pr.nome;
+SELECT cidade, COUNT(*) AS qtd_clientes FROM clientes GROUP BY cidade;
+SELECT pr.nome, SUM(ip.quantidade * ip.preco_unitario) AS total_vendas FROM itens_pedido ip JOIN produtos pr ON ip.id_produto = pr.id_produto GROUP BY pr.nome HAVING SUM(ip.quantidade * ip.preco_unitario) > 100;
+SELECT nome FROM clientes WHERE id_cliente IN (SELECT id_cliente FROM pedidos);
+SELECT AVG(ip.quantidade * ip.preco_unitario) AS media_valor FROM itens_pedido ip;
